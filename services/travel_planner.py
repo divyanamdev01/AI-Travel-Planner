@@ -45,7 +45,7 @@ def create_trip_plan(location):
         itinerary_chain = itinerary_prompt | llm | StrOutputParser()
 
         # Budget
-        budget_prompt = ChatPromptTemplate.from_template(("""
+        budget_prompt = ChatPromptTemplate.from_template("""
                             Estimate the budget for a 3-day trip to {location}.
                             
                             Include:
