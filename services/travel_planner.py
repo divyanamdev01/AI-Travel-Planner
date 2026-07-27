@@ -14,8 +14,7 @@ def create_trip_plan(location):
         place_prompt = ChatPromptTemplate.from_template("""
                     List only the top 6 tourist places in {location}.
                     Return only place names as bullet points.
-                    """
-        )
+                    """)
 
         place_chain = place_prompt | llm | StrOutputParser()
 
@@ -24,8 +23,7 @@ def create_trip_plan(location):
             """
                 Suggest only 3 good hotels in {location}.
                 Return only hotel names with one short line.
-                """
-        )
+                """  )
 
         hotel_chain = hotel_prompt | llm | StrOutputParser()
 
@@ -39,8 +37,7 @@ def create_trip_plan(location):
                             - Cover all places.
                             - Maximum 4 bullet points per day.
                             - Keep the response under 250 words.
-                            """
-        )
+                            """  )
 
         itinerary_chain = itinerary_prompt | llm | StrOutputParser()
 
@@ -56,9 +53,7 @@ def create_trip_plan(location):
                             - Total Estimated Cost
                             
                             Keep the response under 100 words.
-                            """
-            
-        )
+                            """)
 
         budget_chain = budget_prompt | llm | StrOutputParser()
 
