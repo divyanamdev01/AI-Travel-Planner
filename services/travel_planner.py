@@ -11,37 +11,67 @@ def create_trip_plan(location):
         )
 
         # Tourist Places
-        place_prompt = ChatPromptTemplate.from_template(
-            "List the top 6 tourist places in {location}. "
-            "Give one place per line."
+        place_prompt = ChatPromptTemplate.from_template("""
+                    List only the top 6 tourist places in {location}.
+                    Return only place names as bullet points.
+                    """
         )
 
         place_chain = place_prompt | llm | StrOutputParser()
 
         # Hotels
         hotel_prompt = ChatPromptTemplate.from_template(
-            "Suggest 3 good hotels in {location}."
+            """
+                Suggest only 3 good hotels in {location}.
+                Return only hotel names with one short line.
+                """
         )
 
         hotel_chain = hotel_prompt | llm | StrOutputParser()
 
         # Itinerary
-        itinerary_prompt = ChatPromptTemplate.from_template(
-            "Create a detailed 3-day itinerary for visiting these places: {places}"
+        itinerary_prompt = ChatPromptTemplate.from_template("""
+                            Create a concise 3-day itinerary using these places:
+                            
+                            {places}
+                            
+                            Rules:
+                            - Cover all places.
+                            - Maximum 4 bullet points per day.
+                            - Keep the response under 250 words.
+                            """
         )
 
         itinerary_chain = itinerary_prompt | llm | StrOutputParser()
 
         # Budget
-        budget_prompt = ChatPromptTemplate.from_template(
-            "Estimate a budget for a 3-day trip based on this itinerary: {itinerary}"
+        budget_prompt = ChatPromptTemplate.from_template(("""
+                            Estimate the budget for a 3-day trip to {location}.
+                            
+                            Include:
+                            - Hotel
+                            - Food
+                            - Local Transport
+                            - Entry Tickets
+                            - Total Estimated Cost
+                            
+                            Keep the response under 100 words.
+                            """
+            
         )
 
         budget_chain = budget_prompt | llm | StrOutputParser()
 
         # Travel Tips
         tips_prompt = ChatPromptTemplate.from_template(
-            "Give useful travel tips for visiting {location}"
+           """
+                    Give 5 short travel tips for {location}.
+                    
+                    Rules:
+                    - One line per tip.
+                    - No explanation.
+                    - Keep the total response under 80 words.
+                    """
         )
 
         tips_chain = tips_prompt | llm | StrOutputParser()
