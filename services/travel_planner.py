@@ -1,4 +1,4 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -6,8 +6,8 @@ from langchain_core.output_parsers import StrOutputParser
 def create_trip_plan(location):
 
     try:
-        llm = ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash"
+        llm = ChatOpenAI(
+            model="gpt-4o-mini"
         )
 
         # Tourist Places
