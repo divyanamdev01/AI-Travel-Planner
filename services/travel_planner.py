@@ -43,7 +43,7 @@ def create_trip_plan(location):
 
         # Budget
         budget_prompt = ChatPromptTemplate.from_template("""
-                            Estimate the budget for a 3-day trip to {location}.
+                            Estimate the budget for a 3-day trip to {itinerary}.
                             
                             Include:
                             - Hotel
