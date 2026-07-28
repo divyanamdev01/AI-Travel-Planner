@@ -1,6 +1,6 @@
 streamlit
 langchain
 langchain-core
-langchain-google-genai
+langchain_openai
 python-dotenv
 requests
